@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import * as api from './api';
 import { createEmptyCharacter, Character } from './character.vm';
 import { mapCharacterFromApiToVm, mapCharacterFromVmToApi } from './character.mappers';
@@ -10,7 +10,7 @@ export const CharacterContainer: React.FunctionComponent = (props) => {
   const [character, setCharacter] = React.useState<Character>(createEmptyCharacter());
   const [locations, setLocations] = React.useState<Lookup[]>([]);
   const { id } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleLoadLocationCollection = async () => {
     const apiLocations = await api.getLocations();
@@ -19,7 +19,7 @@ export const CharacterContainer: React.FunctionComponent = (props) => {
 
   const handleLoadHotel = async () => {
     const apiCharacter = await api.getCharacter(id);
-    console.log(apiCharacter)
+    console.log(apiCharacter);
     setCharacter(mapCharacterFromApiToVm(apiCharacter));
   };
 
@@ -34,7 +34,7 @@ export const CharacterContainer: React.FunctionComponent = (props) => {
     const apiCharacter = mapCharacterFromVmToApi(character);
     const success = await api.saveCharacter(apiCharacter);
     if (success) {
-      history.goBack();
+      navigate(-1);
     } else {
       alert('Error on save character');
     }
