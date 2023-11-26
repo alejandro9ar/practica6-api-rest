@@ -1,25 +1,21 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import Button from '@mui/material/Button';
 import {
   TextFieldComponent,
-  SelectComponent,
-  RatingComponent,
+  SelectComponent
 } from 'common/components';
-import { Lookup } from 'common/models';
+import { Button } from '@material-ui/core';
 import { formValidation } from './character.validations';
-import { Character } from './character.vm';
 import * as classes from './character.styles';
-
+import { Lookup } from 'common/models';
+import { Character } from './character.vm';
 interface Props {
-  hotel: Character;
+  character: Character;
   locations: Lookup[];
   onSave: (character: Character) => void;
 }
-
 export const CharacterComponent: React.FunctionComponent<Props> = (props) => {
   const { character, locations, onSave } = props;
-
   return (
     <Formik
       onSubmit={onSave}
@@ -30,12 +26,18 @@ export const CharacterComponent: React.FunctionComponent<Props> = (props) => {
       {() => (
         <Form className={classes.root}>
           <TextFieldComponent name="name" label="Name" />
-          <SelectComponent name="origin" label="Origin" items={locations} />
+          <SelectComponent name="location.name" label="Location" items={locations} />
           <TextFieldComponent
             name="species"
             label="Species"
-            multiline={true}
-            rows={3}
+          />
+          <TextFieldComponent
+            name="gender"
+            label="Gender"
+          />
+          <TextFieldComponent
+            name="status"
+            label="Status"
           />
           <Button type="submit" variant="contained" color="primary">
             Save

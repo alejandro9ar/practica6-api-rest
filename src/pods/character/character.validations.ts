@@ -1,19 +1,41 @@
 import { ValidationSchema, Validators } from '@lemoncode/fonk';
 import { createFormikValidation } from '@lemoncode/fonk-formik';
-import { minNumber } from '@lemoncode/fonk-min-number-validator';
+
+const validatorType = 'ACCEPTED_VALUES_VALIDATOR';
+export const acceptedValuesValidator = fieldValidatorArgs => {
+  const { value, customArgs } = fieldValidatorArgs;
+  const validationResult = {
+    succeeded: false,
+    type: validatorType,
+    message: `Value should be equal to some of: ${customArgs.join(', ')}`,
+  };
+  if (customArgs.includes(value)) {
+    validationResult.succeeded = true;
+    validationResult.message = '';
+  }
+  return validationResult;
+}
+
+const StatusList = ['Alive', 'Dead', 'unknown'];
+const GenderList = ['Female', 'Male', 'Genderless', 'unknown'];
 
 const validationSchema: ValidationSchema = {
   field: {
     name: [Validators.required],
-    description: [Validators.required],
-    rating: [
+    status: [
       {
-        validator: minNumber,
-        customArgs: { minValue: 3 },
-      },
+        validator: acceptedValuesValidator,
+        customArgs: StatusList
+      }
     ],
-    address: [Validators.required],
-    city: [Validators.required],
+    gender: [
+      {
+        validator: acceptedValuesValidator,
+        customArgs: GenderList
+      }
+    ],
+    species: [Validators.required],
+    origin: [Validators.required],
   },
 };
 

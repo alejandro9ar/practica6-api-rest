@@ -22,3 +22,13 @@ export interface Character {
   origin: Origin;
   location: Location;
 }
+
+export interface LocationApi {
+  id: number;
+  name: string;
+  type: string;
+  dimension: string;
+  residents: string[];
+  url: string;
+  created: string;
+}

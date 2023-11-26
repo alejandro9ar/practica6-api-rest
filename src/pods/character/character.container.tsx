@@ -2,9 +2,11 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as api from './api';
 import { createEmptyCharacter, Character } from './character.vm';
-import { mapCharacterFromApiToVm, mapCharacterFromVmToApi } from './character.mappers';
+import { mapCharacterFromApiToVm, mapCharacterFromVmToApi, mapLocationApiToLookup } from './character.mappers';
 import { Lookup } from 'common/models';
 import { CharacterComponent } from './character.component';
+import { LocationApi } from './api';
+import { mapToCollection } from '../../common/mappers';
 
 export const CharacterContainer: React.FunctionComponent = (props) => {
   const [character, setCharacter] = React.useState<Character>(createEmptyCharacter());
@@ -13,13 +15,12 @@ export const CharacterContainer: React.FunctionComponent = (props) => {
   const navigate = useNavigate();
 
   const handleLoadLocationCollection = async () => {
-    const apiLocations = await api.getLocations();
-    setLocations(apiLocations);
+    const apiLocations: LocationApi[] = await api.getLocations();
+    setLocations(mapToCollection(apiLocations, mapLocationApiToLookup));
   };
 
   const handleLoadHotel = async () => {
     const apiCharacter = await api.getCharacter(id);
-    console.log(apiCharacter);
     setCharacter(mapCharacterFromApiToVm(apiCharacter));
   };
 
