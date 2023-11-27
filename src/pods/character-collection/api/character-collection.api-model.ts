@@ -21,4 +21,5 @@ export interface CharacterEntityApi {
   created: string;
   origin: Origin;
   location: Location;
+  bestSentences: string[];
 }

@@ -21,6 +21,7 @@ export interface Character {
   created: string;
   origin: Origin;
   location: Location;
+  bestSentences: string[];
 }
 
 export interface LocationApi {
