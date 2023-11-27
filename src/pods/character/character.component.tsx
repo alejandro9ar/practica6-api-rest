@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, FieldArray, Form, Formik } from 'formik';
 import { ListComponent, SelectComponent, TextFieldComponent } from 'common/components';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import { formValidation } from './character.validations';
 import * as classes from './character.styles';
 import { Lookup } from 'common/models';
