@@ -7,14 +7,14 @@ export const getCharacterCollection = async (): Promise<CharacterEntityApi[]> =>
   try {
     let characterListEndpoint = `${BASE_URL}/characters/`;
     const response = await fetch(characterListEndpoint);
+
     if (response.ok) {
       characterListApi = await response.json();
-      console.log('Response from getCharacterCollection:', characterListApi);
-    } else {
-      console.error('Error in getCharacterCollection. Status:', response.status);
     }
+
+    return characterListApi;
   } catch (ex) {
-    console.error('Error in getCharacterCollection:', ex);
+    console.log(ex);
   }
 };
 
