@@ -23,7 +23,6 @@
     "@lemoncode/fonk": "^1.5.4",
     "@lemoncode/fonk-formik": "^4.0.1",
     "@lemoncode/fonk-min-number-validator": "^1.2.0",
-    "@material-ui/core": "^4.12.4",
     "@mui/icons-material": "^5.14.9",
     "@mui/material": "^5.14.10",
     "axios": "^1.5.0",
